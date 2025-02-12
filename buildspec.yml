@@ -1,14 +1,7 @@
 version: 0.2
 phases:
-  install:
-    runtime-versions:
-      nodejs: latest
   build:
     commands:
-      - echo "Checking if index.js exists..."
-      - ls -l index.js || echo 'exports.handler = async (event) => { return "Hello from Lambda!"; }' > index.js
+      - echo "Building the project..."
       - zip deployment_package.zip index.js
-      - aws lambda update-function-code --function-name Hello_Naman --zip-file fileb://deployment_package.zip
-artifacts:
-  files:
-    - deployment_package.zip
+      - aws lambda update-function-code --function-name hello_naman --zip-file fileb://deployment_package.zip
