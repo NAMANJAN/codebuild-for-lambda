@@ -4,4 +4,4 @@ phases:
     commands:
       - echo "Building the project..."
       - zip deployment_package.zip index.js
-      - aws lambda update-function-code --function-name hello_naman --zip-file fileb://deployment_package.zip
+      - aws lambda update-function-code --function-name hello_naman --zip-file files://deployment_package.zip
