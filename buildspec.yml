@@ -1,7 +1,17 @@
 version: 0.2
+
 phases:
+  install:
+    runtime-versions:
+      python: 3.9
   build:
     commands:
-      - echo "Building the project..."
-      - zip deployment_package.zip index.js
-      - aws lambda update-function-code --function-name helloworldfromlambda --zip-file fileb://deployment_package.zip
+      - echo "Zipping Lambda function..."
+      - zip -r function.zip .
+  post_build:
+    commands:
+      - echo "Uploading to S3..."
+      - aws s3 cp function.zip s3://your-s3-bucket/
+artifacts:
+  files:
+    - function.zip
