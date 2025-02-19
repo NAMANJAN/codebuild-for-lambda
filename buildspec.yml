@@ -1,4 +1,7 @@
+version: 0.2
 phases:
-  install:
+  build:
     commands:
-      - aws --version
+      - echo "Building the project..."
+      - zip deployment_package.zip index.js
+      - aws lambda update-function-code --function-name helloworldfromlambda --zip-file fileb://deployment_package.zip
